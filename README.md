@@ -7,6 +7,10 @@
 **Category:** Projects  
 **Primary tag:** Gaming
 
+**Live site:** https://table-tides.pages.dev/  
+**Repository:** https://github.com/IDAK2/table-tides  
+**Contract:** `0xfa36Fe492CB4032e0FEeE1B708Ad9013aa58A11B`
+
 ## The room promise
 
 A good seating plan is more than capacity arithmetic. Guests need access, requested distance, and enough shared ground for a table to feel alive. Table Tides turns that human arrangement into a cooperative on-chain puzzle without asking one host to be the sole judge.
