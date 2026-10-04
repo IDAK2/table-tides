@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {createAccount,createClient} from 'genlayer-js';
+import {studionet} from 'genlayer-js/chains';
+const env=fs.readFileSync(path.resolve('../../../../../accounts.env'),'utf8');
+const raw=env.match(/^ACCOUNT_7_GENLAYER_PRIVATE_KEY\s*=\s*"?([^"\r\n]+)/m)[1].trim();
+const client=createClient({chain:studionet,endpoint:'https://studio.genlayer.com/api',account:createAccount(`0x${raw}`)});
+const address=process.argv[2],id='HARVEST-12';
+const hash=await client.writeContract({address,functionName:'set_table',args:[id,'A neighborhood welcome supper for returning volunteers and first-time guests.',['Mara: wheelchair user, garden volunteer, likes practical projects','Idris: first-time guest, quiet, interested in food history','June: returning volunteer, lively storyteller, avoids loud corners','Theo: first-time guest, patient listener, knows community gardens'],[4,4],['Keep the aisle-side chair at Table A available to the guest who needs step-free access','Do not seat two first-time guests alone without a returning volunteer','Distribute strong storytellers across tables'],3n],value:0n});
+console.log('set_table_tx='+hash);console.log(JSON.stringify(await client.waitForTransactionReceipt({hash,status:'FINALIZED',retries:180,interval:5000})));console.log(JSON.stringify(await client.readContract({address,functionName:'get_dinner',args:[id]})));
